@@ -1,0 +1,142 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+}
+
+main{
+    background-color: #fff;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-calc{
+    width: 550px;
+    height: 600px;
+    background-color: #fafafa;
+    box-shadow: 0px 0px 20px #ccc;
+    border-radius: 20px;
+}
+
+.container-display{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.display{
+    width: 80%;
+    height: 70%;
+    background-color: #ddd;
+    border-radius: 20px;
+}
+
+.display-operation{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.display-operation > p{
+    margin-right: 20px;
+}
+
+.display-number{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    font-size: 26px;
+}
+
+.display-number > h1{
+    width: 100%;
+    text-align: right;
+    overflow-x: hidden;
+}
+
+.container-btns{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btns-sep{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.btn-number, .btn-operations, .btn-del, .btn-equal, .btn-backspace{
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px #aaa;
+    cursor: pointer;
+    transition: .2s;
+    user-select: none;
+}
+
+.btn-number{
+    background-color: #eee;
+}
+
+.btn-number:active{
+    transform: translateY(2px);
+    background-color: #e3e3e3;
+    box-shadow: 0px 0px 5px #888;
+}
+
+.btn-operations{
+    background-color: #ddd;
+}
+
+.btn-operations:active{
+    transform: translateY(2px);
+    background-color: #d3d3d3;
+    box-shadow: 0px 0px 5px #888;
+}
+
+.btn-del{
+    background-color: #f55c7a;
+    width: 210px;
+}
+
+.btn-del:active{
+    transform: translateY(2px);
+    background-color: #e05470;
+    box-shadow: 0px 0px 5px #888;
+}
+
+.btn-backspace{
+    background-color: #f6bc66;
+}
+
+.btn-backspace:active{
+    transform: translateY(2px);
+    background-color: #e4ae5e;
+    box-shadow: 0px 0px 5px #888;
+}
+
+.btn-equal{
+    background-color: #89d2a3;
+}
+
+.btn-equal:active{
+    transform: translateY(2px);
+    background-color: #7fc296;
+    box-shadow: 0px 0px 5px #888;
+}
