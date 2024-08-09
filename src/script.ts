@@ -24,19 +24,20 @@ const IdBtnNumber = [
 
 const display_number = document.getElementById('display-nmb') as HTMLHeadingElement
 const display_operation = document.getElementById('display-opr') as HTMLParagraphElement
+const hst = document.getElementById('history') as HTMLDivElement
 
 const btn_equal = document.getElementById('btn-equal') as HTMLButtonElement
 const btn_del = document.getElementById('btn-del') as HTMLButtonElement
 const btn_point = document.getElementById('btn-point') as HTMLButtonElement
 const btn_backspace = document.getElementById('btn-backspace') as HTMLButtonElement
 const btn_chg = document.getElementById('btn-chg') as HTMLButtonElement
-const hst = document.getElementById('history') as HTMLDivElement
 
 const btn_plus = document.getElementById('btn-plus') as HTMLButtonElement
 const btn_mult = document.getElementById('btn-mult') as HTMLButtonElement
 const btn_div = document.getElementById('btn-div') as HTMLButtonElement
 const btn_sub = document.getElementById('btn-sub') as HTMLButtonElement
 const btn_fat = document.getElementById('btn-fat') as HTMLButtonElement
+const btn_per = document.getElementById('btn-per') as HTMLButtonElement
 
 btn_equal.addEventListener('click', () => result())
 btn_del.addEventListener('click', () => del())
@@ -49,6 +50,7 @@ btn_mult.addEventListener('click', () => operation('X'))
 btn_div.addEventListener('click', () => operation('/'))
 btn_sub.addEventListener('click', () => operation('-'))
 btn_fat.addEventListener('click', () => fatorial())
+btn_per.addEventListener('click', () => percent())
 
 IdBtnNumber.forEach(btn => {
     const btn_number = document.getElementById(btn) as HTMLButtonElement
@@ -172,5 +174,12 @@ const fatorial = () => {
         number_result = result_fat
         show_result(true)
     }
+}
 
+const percent = () => {
+    number_one = Number(display_number.textContent)
+    display_operation.textContent = `${number_one}%`
+    number_one = number_one / 100
+    set_operation = 'X'
+    display_number.textContent = ''
 }

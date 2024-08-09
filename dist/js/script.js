@@ -20,17 +20,18 @@ const IdBtnNumber = [
 ];
 const display_number = document.getElementById('display-nmb');
 const display_operation = document.getElementById('display-opr');
+const hst = document.getElementById('history');
 const btn_equal = document.getElementById('btn-equal');
 const btn_del = document.getElementById('btn-del');
 const btn_point = document.getElementById('btn-point');
 const btn_backspace = document.getElementById('btn-backspace');
 const btn_chg = document.getElementById('btn-chg');
-const hst = document.getElementById('history');
 const btn_plus = document.getElementById('btn-plus');
 const btn_mult = document.getElementById('btn-mult');
 const btn_div = document.getElementById('btn-div');
 const btn_sub = document.getElementById('btn-sub');
 const btn_fat = document.getElementById('btn-fat');
+const btn_per = document.getElementById('btn-per');
 btn_equal.addEventListener('click', () => result());
 btn_del.addEventListener('click', () => del());
 btn_point.addEventListener('click', () => set_point = true);
@@ -41,6 +42,7 @@ btn_mult.addEventListener('click', () => operation('X'));
 btn_div.addEventListener('click', () => operation('/'));
 btn_sub.addEventListener('click', () => operation('-'));
 btn_fat.addEventListener('click', () => fatorial());
+btn_per.addEventListener('click', () => percent());
 IdBtnNumber.forEach(btn => {
     const btn_number = document.getElementById(btn);
     btn_number.addEventListener('click', () => {
@@ -146,4 +148,11 @@ const fatorial = () => {
         number_result = result_fat;
         show_result(true);
     }
+};
+const percent = () => {
+    number_one = Number(display_number.textContent);
+    display_operation.textContent = `${number_one}%`;
+    number_one = number_one / 100;
+    set_operation = 'X';
+    display_number.textContent = '';
 };
