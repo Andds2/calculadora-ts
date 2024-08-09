@@ -30,6 +30,7 @@ const btn_del = document.getElementById('btn-del') as HTMLButtonElement
 const btn_point = document.getElementById('btn-point') as HTMLButtonElement
 const btn_backspace = document.getElementById('btn-backspace') as HTMLButtonElement
 const btn_chg = document.getElementById('btn-chg') as HTMLButtonElement
+const hst = document.getElementById('history') as HTMLDivElement
 
 const btn_plus = document.getElementById('btn-plus') as HTMLButtonElement
 const btn_mult = document.getElementById('btn-mult') as HTMLButtonElement
@@ -104,6 +105,7 @@ const show_result = () => {
     display_operation.textContent = ''
     result_show = true
     c_point = 0
+    history_create()
 }
 
 const del = () => {
@@ -127,4 +129,19 @@ const change = () => {
     const change_number: number = Number(number) * -1
 
     display_number.textContent = String(change_number)
+}
+
+const history_create = () => {
+
+    const div = document.createElement('div') as HTMLDivElement
+    const h2 = document.createElement('h2') as HTMLHeadingElement
+    const p = document.createElement('p') as HTMLParagraphElement
+
+    h2.textContent = String(number_result)
+    p.textContent = `${number_one} ${set_operation} ${number_two}`
+
+    div.appendChild(p)
+    div.appendChild(h2)
+
+    hst.appendChild(div)
 }

@@ -25,6 +25,7 @@ const btn_del = document.getElementById('btn-del');
 const btn_point = document.getElementById('btn-point');
 const btn_backspace = document.getElementById('btn-backspace');
 const btn_chg = document.getElementById('btn-chg');
+const hst = document.getElementById('history');
 const btn_plus = document.getElementById('btn-plus');
 const btn_mult = document.getElementById('btn-mult');
 const btn_div = document.getElementById('btn-div');
@@ -89,6 +90,7 @@ const show_result = () => {
     display_operation.textContent = '';
     result_show = true;
     c_point = 0;
+    history_create();
 };
 const del = () => {
     number_one = 0;
@@ -107,4 +109,14 @@ const change = () => {
     const number = display_number.textContent;
     const change_number = Number(number) * -1;
     display_number.textContent = String(change_number);
+};
+const history_create = () => {
+    const div = document.createElement('div');
+    const h2 = document.createElement('h2');
+    const p = document.createElement('p');
+    h2.textContent = String(number_result);
+    p.textContent = `${number_one} ${set_operation} ${number_two}`;
+    div.appendChild(p);
+    div.appendChild(h2);
+    hst.appendChild(div);
 };
