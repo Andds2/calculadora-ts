@@ -35,6 +35,7 @@ main{
     height: 70%;
     background-color: #ddd;
     border-radius: 20px;
+    box-shadow: 0px 0px 10px #aaa;
 }
 
 .display-operation{
@@ -79,7 +80,11 @@ main{
     gap: 10px;
 }
 
-.btn-number, .btn-operations, .btn-del, .btn-equal, .btn-backspace{
+.btn-number, 
+.btn-operations, 
+.btn-del, 
+.btn-equal, 
+.btn-backspace{
     width: 100px;
     height: 40px;
     border: none;
@@ -139,4 +144,33 @@ main{
     transform: translateY(2px);
     background-color: #7fc296;
     box-shadow: 0px 0px 5px #888;
+}
+
+@media screen and (max-width: 1024px){
+    .container-calc{
+        width: 400px;
+        height: 550px;
+        background-color: #fafafa;
+        box-shadow: 0px 0px 20px #ccc;
+        border-radius: 20px;
+    }
+
+    .btn-number, 
+    .btn-operations, 
+    .btn-del, 
+    .btn-equal, 
+    .btn-backspace{
+        width: 80px;
+        height: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 5px #aaa;
+    }
+
+    .btn-del{
+        width: 170px;
+    }
+
+    .display-number{
+        font-size: 20px;
+    }
 }

@@ -29,6 +29,7 @@ const btn_equal = document.getElementById('btn-equal') as HTMLButtonElement
 const btn_del = document.getElementById('btn-del') as HTMLButtonElement
 const btn_point = document.getElementById('btn-point') as HTMLButtonElement
 const btn_backspace = document.getElementById('btn-backspace') as HTMLButtonElement
+const btn_chg = document.getElementById('btn-chg') as HTMLButtonElement
 
 const btn_plus = document.getElementById('btn-plus') as HTMLButtonElement
 const btn_mult = document.getElementById('btn-mult') as HTMLButtonElement
@@ -39,6 +40,7 @@ btn_equal.addEventListener('click', () => result())
 btn_del.addEventListener('click', () => del())
 btn_point.addEventListener('click', () => set_point = true)
 btn_backspace.addEventListener('click', () => backspace())
+btn_chg.addEventListener('click', () => change())
 
 btn_plus.addEventListener('click', () => operation('+'))
 btn_mult.addEventListener('click', () => operation('X'))
@@ -118,4 +120,11 @@ const backspace = () => {
     const new_number = number?.slice(0, -1)
 
     display_number.textContent = String(new_number)
+}
+
+const change = () => {
+    const number = display_number.textContent
+    const change_number: number = Number(number) * -1
+
+    display_number.textContent = String(change_number)
 }
