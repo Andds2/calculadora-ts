@@ -5,7 +5,7 @@ let number_result = 0;
 let result_show = false;
 let set_point = false;
 let c_point = 0;
-let set_operation;
+let set_operation = '';
 const IdBtnNumber = [
     'btn-number-1',
     'btn-number-2',
@@ -30,6 +30,7 @@ const btn_plus = document.getElementById('btn-plus');
 const btn_mult = document.getElementById('btn-mult');
 const btn_div = document.getElementById('btn-div');
 const btn_sub = document.getElementById('btn-sub');
+const btn_fat = document.getElementById('btn-fat');
 btn_equal.addEventListener('click', () => result());
 btn_del.addEventListener('click', () => del());
 btn_point.addEventListener('click', () => set_point = true);
@@ -39,6 +40,7 @@ btn_plus.addEventListener('click', () => operation('+'));
 btn_mult.addEventListener('click', () => operation('X'));
 btn_div.addEventListener('click', () => operation('/'));
 btn_sub.addEventListener('click', () => operation('-'));
+btn_fat.addEventListener('click', () => fatorial());
 IdBtnNumber.forEach(btn => {
     const btn_number = document.getElementById(btn);
     btn_number.addEventListener('click', () => {
@@ -54,8 +56,10 @@ IdBtnNumber.forEach(btn => {
         display_number.textContent += btn_number.value;
     });
 });
-const result = () => {
-    number_two = Number(display_number.textContent);
+const result = (op_cient) => {
+    if (!op_cient) {
+        number_two = Number(display_number.textContent);
+    }
     switch (set_operation) {
         case '+':
             number_result = number_one + number_two;
@@ -85,12 +89,13 @@ const operation = (op) => {
     set_operation = op;
     c_point = 0;
 };
-const show_result = () => {
+const show_result = (op_cient) => {
     display_number.textContent = `${number_result}`;
     display_operation.textContent = '';
     result_show = true;
     c_point = 0;
-    history_create();
+    history_create(op_cient);
+    set_operation = '';
 };
 const del = () => {
     number_one = 0;
@@ -110,13 +115,35 @@ const change = () => {
     const change_number = Number(number) * -1;
     display_number.textContent = String(change_number);
 };
-const history_create = () => {
+const history_create = (op_cient) => {
     const div = document.createElement('div');
     const h2 = document.createElement('h2');
     const p = document.createElement('p');
-    h2.textContent = String(number_result);
-    p.textContent = `${number_one} ${set_operation} ${number_two}`;
+    if (op_cient) {
+        h2.textContent = String(number_result);
+        p.textContent = `${number_result}!`;
+    }
+    else {
+        h2.textContent = String(number_result);
+        p.textContent = `${number_one} ${set_operation} ${number_two}`;
+    }
     div.appendChild(p);
     div.appendChild(h2);
     hst.appendChild(div);
+};
+const fatorial = () => {
+    let number_fat = Number(display_number.textContent);
+    let result_fat = 1;
+    while (number_fat > 0) {
+        result_fat = result_fat * number_fat;
+        number_fat -= 1;
+    }
+    if (set_operation != '') {
+        number_two = result_fat;
+        result(true);
+    }
+    else {
+        number_result = result_fat;
+        show_result(true);
+    }
 };

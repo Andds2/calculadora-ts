@@ -7,7 +7,7 @@ let set_point: boolean = false
 
 let c_point: number = 0
 
-let set_operation: string
+let set_operation: string = ''
 
 const IdBtnNumber = [
     'btn-number-1',
@@ -36,6 +36,7 @@ const btn_plus = document.getElementById('btn-plus') as HTMLButtonElement
 const btn_mult = document.getElementById('btn-mult') as HTMLButtonElement
 const btn_div = document.getElementById('btn-div') as HTMLButtonElement
 const btn_sub = document.getElementById('btn-sub') as HTMLButtonElement
+const btn_fat = document.getElementById('btn-fat') as HTMLButtonElement
 
 btn_equal.addEventListener('click', () => result())
 btn_del.addEventListener('click', () => del())
@@ -47,6 +48,7 @@ btn_plus.addEventListener('click', () => operation('+'))
 btn_mult.addEventListener('click', () => operation('X'))
 btn_div.addEventListener('click', () => operation('/'))
 btn_sub.addEventListener('click', () => operation('-'))
+btn_fat.addEventListener('click', () => fatorial())
 
 IdBtnNumber.forEach(btn => {
     const btn_number = document.getElementById(btn) as HTMLButtonElement
@@ -65,8 +67,10 @@ IdBtnNumber.forEach(btn => {
     })
 })
 
-const result = () => {
-    number_two = Number(display_number.textContent)
+const result = (op_cient?: boolean) => {
+    if(!op_cient){
+        number_two = Number(display_number.textContent)
+    }
 
     switch(set_operation){
         case '+':
@@ -100,12 +104,13 @@ const operation = (op: string):void => {
     c_point = 0
 }
 
-const show_result = () => {
+const show_result = (op_cient?: boolean) => {
     display_number.textContent = `${number_result}`
     display_operation.textContent = ''
     result_show = true
     c_point = 0
-    history_create()
+    history_create(op_cient)
+    set_operation = ''
 }
 
 const del = () => {
@@ -131,17 +136,41 @@ const change = () => {
     display_number.textContent = String(change_number)
 }
 
-const history_create = () => {
-
+const history_create = (op_cient?: boolean) => {
     const div = document.createElement('div') as HTMLDivElement
     const h2 = document.createElement('h2') as HTMLHeadingElement
     const p = document.createElement('p') as HTMLParagraphElement
 
-    h2.textContent = String(number_result)
-    p.textContent = `${number_one} ${set_operation} ${number_two}`
+    if(op_cient){
+        h2.textContent = String(number_result)
+        p.textContent = `${number_result}!`
+    } else {
+        h2.textContent = String(number_result)
+        p.textContent = `${number_one} ${set_operation} ${number_two}`
+    }
 
     div.appendChild(p)
     div.appendChild(h2)
 
     hst.appendChild(div)
+}
+
+const fatorial = () => {
+    let number_fat: number = Number(display_number.textContent)
+    let result_fat: number = 1
+    
+    
+    while(number_fat > 0){
+        result_fat = result_fat * number_fat
+        number_fat -= 1
+    }
+
+    if(set_operation != ''){
+        number_two = result_fat
+        result(true)
+    } else {
+        number_result = result_fat
+        show_result(true)
+    }
+
 }

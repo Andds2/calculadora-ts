@@ -85,7 +85,8 @@ main{
 .btn-operations, 
 .btn-del, 
 .btn-equal, 
-.btn-backspace{
+.btn-backspace,
+.btn-cient{
     width: 100px;
     height: 40px;
     border: none;
@@ -104,6 +105,7 @@ main{
     transform: translateY(2px);
     background-color: #e3e3e3;
     box-shadow: 0px 0px 5px #888;
+    outline: none;
 }
 
 .btn-operations{
@@ -114,6 +116,7 @@ main{
     transform: translateY(2px);
     background-color: #d3d3d3;
     box-shadow: 0px 0px 5px #888;
+    outline: none;
 }
 
 .btn-del{
@@ -125,6 +128,7 @@ main{
     transform: translateY(2px);
     background-color: #e05470;
     box-shadow: 0px 0px 5px #888;
+    outline: none;
 }
 
 .btn-backspace{
@@ -135,6 +139,7 @@ main{
     transform: translateY(2px);
     background-color: #e4ae5e;
     box-shadow: 0px 0px 5px #888;
+    outline: none;
 }
 
 .btn-equal{
@@ -145,6 +150,20 @@ main{
     transform: translateY(2px);
     background-color: #7fc296;
     box-shadow: 0px 0px 5px #888;
+    outline: none;
+}
+
+.btn-cient{
+    width: 78px;
+    background-color: #777;
+    color: #fff;
+}
+
+.btn-cient:active{
+    transform: translateY(2px);
+    background-color: #666;
+    box-shadow: 0px 0px 5px #888;
+    outline: none;
 }
 
 .history-container{
