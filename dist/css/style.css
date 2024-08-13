@@ -32,7 +32,7 @@ main{
 }
 
 .display{
-    width: 80%;
+    width: 90%;
     height: 70%;
     background-color: #ddd;
     border-radius: 20px;
@@ -56,13 +56,13 @@ main{
     height: 80%;
     display: flex;
     align-items: center;
-    font-size: 26px;
 }
 
 .display-number > h1{
     width: 100%;
     text-align: right;
     overflow-x: hidden;
+    font-size: 42px;
 }
 
 .container-btns{

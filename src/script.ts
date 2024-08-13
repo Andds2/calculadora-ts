@@ -38,6 +38,9 @@ const btn_div = document.getElementById('btn-div') as HTMLButtonElement
 const btn_sub = document.getElementById('btn-sub') as HTMLButtonElement
 const btn_fat = document.getElementById('btn-fat') as HTMLButtonElement
 const btn_per = document.getElementById('btn-per') as HTMLButtonElement
+const btn_pot = document.getElementById('btn-pot') as HTMLButtonElement
+const btn_rzq = document.getElementById('btn-rzq') as HTMLButtonElement
+const btn_raiz = document.getElementById('btn-raiz') as HTMLButtonElement
 
 btn_equal.addEventListener('click', () => result())
 btn_del.addEventListener('click', () => del())
@@ -49,6 +52,9 @@ btn_plus.addEventListener('click', () => operation('+'))
 btn_mult.addEventListener('click', () => operation('X'))
 btn_div.addEventListener('click', () => operation('/'))
 btn_sub.addEventListener('click', () => operation('-'))
+btn_pot.addEventListener('click', () => operation('^'))
+btn_raiz.addEventListener('click', () => operation('√'))
+btn_rzq.addEventListener('click', () => raizq())
 btn_fat.addEventListener('click', () => fatorial())
 btn_per.addEventListener('click', () => percent())
 
@@ -91,6 +97,14 @@ const result = (op_cient?: boolean) => {
             number_result = number_one / number_two
             show_result()
             break
+        case '^':
+            number_result = number_one ** number_two
+            show_result()
+            break
+        case '√':
+            number_result = Math.pow(number_two, 1/number_one)
+            show_result('raiz')
+            break
         default:
             break
     }
@@ -106,8 +120,17 @@ const operation = (op: string):void => {
     c_point = 0
 }
 
-const show_result = (op_cient?: boolean) => {
-    display_number.textContent = `${number_result}`
+const show_result = (op_cient?: string) => {
+    const split_num_res = number_result.toString().split('.')
+    if (typeof split_num_res[1] == 'undefined'){
+        display_number.textContent = `${number_result}`
+    } else if (split_num_res[1].length > 8){
+        console.log(split_num_res[1])
+        console.log(Number(number_result).toFixed(8))
+        display_number.textContent = `${number_result.toFixed(8)}`
+    } else {
+        display_number.textContent = `${number_result}`
+    }
     display_operation.textContent = ''
     result_show = true
     c_point = 0
@@ -125,7 +148,7 @@ const del = () => {
 }
 
 const backspace = () => {
-    const number  = display_number.textContent
+    const number = display_number.textContent
     const new_number = number?.slice(0, -1)
 
     display_number.textContent = String(new_number)
@@ -138,14 +161,20 @@ const change = () => {
     display_number.textContent = String(change_number)
 }
 
-const history_create = (op_cient?: boolean) => {
+const history_create = (op_cient?: string) => {
     const div = document.createElement('div') as HTMLDivElement
     const h2 = document.createElement('h2') as HTMLHeadingElement
     const p = document.createElement('p') as HTMLParagraphElement
 
-    if(op_cient){
+    if(op_cient === 'fat'){
         h2.textContent = String(number_result)
-        p.textContent = `${number_result}!`
+        p.textContent = `${number_one}!`
+    } else if(op_cient === 'raiz2'){
+        h2.textContent = String(number_result)
+        p.textContent += `raiz 2 de ${number_one}`
+    } else if(op_cient === 'raiz'){
+        h2.textContent = String(number_result)
+        p.textContent += `raiz ${number_one} de ${number_two}`
     } else {
         h2.textContent = String(number_result)
         p.textContent = `${number_one} ${set_operation} ${number_two}`
@@ -159,8 +188,8 @@ const history_create = (op_cient?: boolean) => {
 
 const fatorial = () => {
     let number_fat: number = Number(display_number.textContent)
+    const number_fat_real = number_fat
     let result_fat: number = 1
-    
     
     while(number_fat > 0){
         result_fat = result_fat * number_fat
@@ -172,7 +201,8 @@ const fatorial = () => {
         result(true)
     } else {
         number_result = result_fat
-        show_result(true)
+        number_one = number_fat_real
+        show_result('fat')
     }
 }
 
@@ -182,4 +212,12 @@ const percent = () => {
     number_one = number_one / 100
     set_operation = 'X'
     display_number.textContent = ''
+}
+
+const raizq = () => {
+    number_one = Number(display_number.textContent)
+
+    number_result = Math.sqrt(number_one)
+
+    show_result('raiz2')
 }

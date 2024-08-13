@@ -32,6 +32,9 @@ const btn_div = document.getElementById('btn-div');
 const btn_sub = document.getElementById('btn-sub');
 const btn_fat = document.getElementById('btn-fat');
 const btn_per = document.getElementById('btn-per');
+const btn_pot = document.getElementById('btn-pot');
+const btn_rzq = document.getElementById('btn-rzq');
+const btn_raiz = document.getElementById('btn-raiz');
 btn_equal.addEventListener('click', () => result());
 btn_del.addEventListener('click', () => del());
 btn_point.addEventListener('click', () => set_point = true);
@@ -41,6 +44,9 @@ btn_plus.addEventListener('click', () => operation('+'));
 btn_mult.addEventListener('click', () => operation('X'));
 btn_div.addEventListener('click', () => operation('/'));
 btn_sub.addEventListener('click', () => operation('-'));
+btn_pot.addEventListener('click', () => operation('^'));
+btn_raiz.addEventListener('click', () => operation('√'));
+btn_rzq.addEventListener('click', () => raizq());
 btn_fat.addEventListener('click', () => fatorial());
 btn_per.addEventListener('click', () => percent());
 IdBtnNumber.forEach(btn => {
@@ -79,6 +85,14 @@ const result = (op_cient) => {
             number_result = number_one / number_two;
             show_result();
             break;
+        case '^':
+            number_result = number_one ** number_two;
+            show_result();
+            break;
+        case '√':
+            number_result = Math.pow(number_two, 1 / number_one);
+            show_result('raiz');
+            break;
         default:
             break;
     }
@@ -92,7 +106,18 @@ const operation = (op) => {
     c_point = 0;
 };
 const show_result = (op_cient) => {
-    display_number.textContent = `${number_result}`;
+    const split_num_res = number_result.toString().split('.');
+    if (typeof split_num_res[1] == 'undefined') {
+        display_number.textContent = `${number_result}`;
+    }
+    else if (split_num_res[1].length > 8) {
+        console.log(split_num_res[1]);
+        console.log(Number(number_result).toFixed(8));
+        display_number.textContent = `${number_result.toFixed(8)}`;
+    }
+    else {
+        display_number.textContent = `${number_result}`;
+    }
     display_operation.textContent = '';
     result_show = true;
     c_point = 0;
@@ -121,9 +146,17 @@ const history_create = (op_cient) => {
     const div = document.createElement('div');
     const h2 = document.createElement('h2');
     const p = document.createElement('p');
-    if (op_cient) {
+    if (op_cient === 'fat') {
         h2.textContent = String(number_result);
-        p.textContent = `${number_result}!`;
+        p.textContent = `${number_one}!`;
+    }
+    else if (op_cient === 'raiz2') {
+        h2.textContent = String(number_result);
+        p.textContent += `raiz 2 de ${number_one}`;
+    }
+    else if (op_cient === 'raiz') {
+        h2.textContent = String(number_result);
+        p.textContent += `raiz ${number_one} de ${number_two}`;
     }
     else {
         h2.textContent = String(number_result);
@@ -135,6 +168,7 @@ const history_create = (op_cient) => {
 };
 const fatorial = () => {
     let number_fat = Number(display_number.textContent);
+    const number_fat_real = number_fat;
     let result_fat = 1;
     while (number_fat > 0) {
         result_fat = result_fat * number_fat;
@@ -146,7 +180,8 @@ const fatorial = () => {
     }
     else {
         number_result = result_fat;
-        show_result(true);
+        number_one = number_fat_real;
+        show_result('fat');
     }
 };
 const percent = () => {
@@ -155,4 +190,9 @@ const percent = () => {
     number_one = number_one / 100;
     set_operation = 'X';
     display_number.textContent = '';
+};
+const raizq = () => {
+    number_one = Number(display_number.textContent);
+    number_result = Math.sqrt(number_one);
+    show_result('raiz2');
 };
